@@ -34,7 +34,7 @@
             txtIdade = new TextBox();
             btnCriar = new Button();
             btnVer = new Button();
-            ldlMensagem = new Label();
+            lblMensagem = new Label();
             SuspendLayout();
             // 
             // lblNome
@@ -120,24 +120,24 @@
             btnVer.UseVisualStyleBackColor = false;
             btnVer.Click += btnVer_Click;
             // 
-            // ldlMensagem
+            // lblMensagem
             // 
-            ldlMensagem.AutoSize = true;
-            ldlMensagem.BackColor = SystemColors.ActiveBorder;
-            ldlMensagem.BorderStyle = BorderStyle.FixedSingle;
-            ldlMensagem.Font = new Font("Yu Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            ldlMensagem.ForeColor = SystemColors.WindowFrame;
-            ldlMensagem.Location = new Point(399, 431);
-            ldlMensagem.Name = "ldlMensagem";
-            ldlMensagem.Size = new Size(2, 23);
-            ldlMensagem.TabIndex = 6;
+            lblMensagem.AutoSize = true;
+            lblMensagem.BackColor = SystemColors.ActiveBorder;
+            lblMensagem.BorderStyle = BorderStyle.FixedSingle;
+            lblMensagem.Font = new Font("Yu Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMensagem.ForeColor = SystemColors.WindowFrame;
+            lblMensagem.Location = new Point(399, 431);
+            lblMensagem.Name = "lblMensagem";
+            lblMensagem.Size = new Size(2, 23);
+            lblMensagem.TabIndex = 6;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 662);
-            Controls.Add(ldlMensagem);
+            Controls.Add(lblMensagem);
             Controls.Add(btnVer);
             Controls.Add(btnCriar);
             Controls.Add(txtIdade);
@@ -159,6 +159,6 @@
         private TextBox txtIdade;
         private Button btnCriar;
         private Button btnVer;
-        private Label ldlMensagem;
+        private Label lblMensagem;
     }
 }
