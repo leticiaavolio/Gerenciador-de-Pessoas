@@ -11,18 +11,15 @@ namespace PrjGerenciadorDePessoas
         public Form1()
         {
             InitializeComponent();
-            btnVer.Enabled = false;
-            btnSalvar.Enabled = false;
+            Reset();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            lblMensagem.Text = string.Empty;
         }
 
         private void btnCriar_Click(object sender, EventArgs e)
         {
-            lblMensagem.Text = String.Empty;
             try
             {
                 string Nome = txtNome.Text;
@@ -34,37 +31,39 @@ namespace PrjGerenciadorDePessoas
             }
             catch (FormatException)
             {
-                lblMensagem.Text = "Apenas números podem ser utilizados no campo idade!!!";
+                MessageBox.Show("Apenas números podem ser utilizados no campo idade!!!", "Campo Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             catch (Exception ex)
             {
-                lblMensagem.Text = ex.Message;
+                MessageBox.Show(ex.Message);
+                return;
             }
 
-            txtNome.Clear();
-            txtIdade.Clear();
-            txtNome.Focus();
+            Reset();
 
             MessageBox.Show("Pessoa adicionada com sucesso!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            btnSalvar.Enabled = true;
-            btnVer.Enabled = true;
         }
 
         private void lstPessoas_SelectedIndexChanged(object sender, EventArgs e)
         {
+            btnSalvar.Enabled = true;
+            btnExcluir.Enabled = true;
+            btnVer.Enabled = true;
+            btnCriar.Enabled = false;
+
             if (lstPessoas.SelectedItem != null)
             {
                 Pessoa p = (Pessoa)lstPessoas.SelectedItem;//casting
                 txtNome.Text = p.Nome;
                 txtIdade.Text = p.Idade.ToString();
-
-                btnSalvar.Enabled = true;
-                btnExcluir.Enabled = true;
             }
             else
             {
                 btnSalvar.Enabled = false;
                 btnExcluir.Enabled = false;
+                btnVer.Enabled = false;
+                btnCriar.Enabled = true;
             }
         }
 
@@ -79,50 +78,50 @@ namespace PrjGerenciadorDePessoas
                 txtNome.Clear();
                 txtNome.Focus();
             }
-            btnSalvar.Enabled = false;
-            btnVer.Enabled = false;
+            Reset();
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            if (lstPessoas.SelectedItem == null)
-            {
-                MessageBox.Show("Não há itens selecionados na lista", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
+            //if (lstPessoas.SelectedItem == null)
+            //{
+            //    MessageBox.Show("Não há itens selecionados na lista", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
+            //else
+            //{
                 DialogResult ExcluirPessoa = MessageBox.Show($"Tem certeza que deseja excluir {lstPessoas.SelectedItem}?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Hand);
                 if (ExcluirPessoa == DialogResult.Yes)
                 {
                     lstPessoas.Items.Remove(lstPessoas.SelectedItem);
-                    pessoas.Remove((Pessoa)lstPessoas.SelectedItem);
-                    btnSalvar.Enabled = false;
-                    btnExcluir.Enabled = false;
+
+                    Reset();
                 }
-            }
+            //}
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            if (pessoa != null)
+            if (lstPessoas.SelectedItem != null)
             {
                 try
                 {
-                    pessoa.Nome = txtNome.Text;
-                    pessoa.Idade = Convert.ToInt32(txtIdade.Text);
+                    this.pessoa = (Pessoa)lstPessoas.SelectedItem;
+                    this.pessoa.Nome = txtNome.Text;
+                    this.pessoa.Idade = Convert.ToInt32(txtIdade.Text);
+                    lstPessoas.Items[lstPessoas.SelectedIndex] = this.pessoa;
 
-                    int selectedIndex = lstPessoas.SelectedIndex;
-                    lstPessoas.Items[selectedIndex] = pessoa;
+                    Reset();
 
                     MessageBox.Show("Dados da pessoa atualizados com sucesso!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (FormatException)
                 {
-                    lblMensagem.Text = "Apenas números podem ser utilizados no campo idade!!!";
+                    MessageBox.Show("Apenas números podem ser utilizados no campo idade!!!", "Campo Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 catch (Exception ex)
                 {
-                    lblMensagem.Text = ex.Message;
+                    MessageBox.Show(ex.Message, "Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -130,6 +129,21 @@ namespace PrjGerenciadorDePessoas
         private void btnVer_Click(object sender, EventArgs e)
         {
             MessageBox.Show($"Nome: {pessoa.Nome}\nIdade: {pessoa.getIdadeFormatada()}", "Detalhes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnLimparCaixa_Click(object sender, EventArgs e)
+        {
+            Reset();
+        }
+        private void Reset()
+        {
+            txtNome.Clear();
+            txtIdade.Clear();
+            txtNome.Focus();
+            lstPessoas.SelectedItem = null;
+            btnSalvar.Enabled = false;
+            btnExcluir.Enabled = false;
+            btnVer.Enabled = false;
         }
     }
 }

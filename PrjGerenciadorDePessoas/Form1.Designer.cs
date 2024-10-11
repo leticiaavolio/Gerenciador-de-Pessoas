@@ -34,11 +34,12 @@
             txtIdade = new TextBox();
             btnCriar = new Button();
             btnSalvar = new Button();
-            lblMensagem = new Label();
             lstPessoas = new ListBox();
             btnVer = new Button();
             btnExcluir = new Button();
             btnLimpar = new Button();
+            btnGerar = new Button();
+            btnLimparCaixa = new Button();
             SuspendLayout();
             // 
             // lblNome
@@ -48,7 +49,7 @@
             lblNome.BorderStyle = BorderStyle.FixedSingle;
             lblNome.Font = new Font("Yu Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblNome.ForeColor = SystemColors.WindowFrame;
-            lblNome.Location = new Point(163, 220);
+            lblNome.Location = new Point(163, 225);
             lblNome.Name = "lblNome";
             lblNome.Size = new Size(63, 23);
             lblNome.TabIndex = 0;
@@ -61,7 +62,7 @@
             lblIdade.BorderStyle = BorderStyle.FixedSingle;
             lblIdade.Font = new Font("Yu Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblIdade.ForeColor = SystemColors.WindowFrame;
-            lblIdade.Location = new Point(163, 270);
+            lblIdade.Location = new Point(163, 275);
             lblIdade.Name = "lblIdade";
             lblIdade.Size = new Size(60, 23);
             lblIdade.TabIndex = 1;
@@ -73,7 +74,7 @@
             txtNome.BorderStyle = BorderStyle.FixedSingle;
             txtNome.Font = new Font("Yu Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtNome.ForeColor = SystemColors.WindowFrame;
-            txtNome.Location = new Point(247, 210);
+            txtNome.Location = new Point(247, 215);
             txtNome.Margin = new Padding(0);
             txtNome.Name = "txtNome";
             txtNome.Size = new Size(304, 33);
@@ -85,9 +86,9 @@
             txtIdade.BorderStyle = BorderStyle.FixedSingle;
             txtIdade.Font = new Font("Yu Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtIdade.ForeColor = SystemColors.WindowFrame;
-            txtIdade.Location = new Point(247, 260);
+            txtIdade.Location = new Point(247, 265);
             txtIdade.Name = "txtIdade";
-            txtIdade.Size = new Size(79, 33);
+            txtIdade.Size = new Size(304, 33);
             txtIdade.TabIndex = 3;
             // 
             // btnCriar
@@ -98,7 +99,7 @@
             btnCriar.FlatAppearance.BorderSize = 2;
             btnCriar.Font = new Font("Yu Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnCriar.ForeColor = SystemColors.WindowFrame;
-            btnCriar.Location = new Point(163, 317);
+            btnCriar.Location = new Point(163, 322);
             btnCriar.Name = "btnCriar";
             btnCriar.Size = new Size(121, 33);
             btnCriar.TabIndex = 4;
@@ -114,7 +115,7 @@
             btnSalvar.FlatAppearance.BorderSize = 2;
             btnSalvar.Font = new Font("Yu Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnSalvar.ForeColor = SystemColors.WindowFrame;
-            btnSalvar.Location = new Point(416, 317);
+            btnSalvar.Location = new Point(416, 322);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(135, 33);
             btnSalvar.TabIndex = 5;
@@ -122,23 +123,11 @@
             btnSalvar.UseVisualStyleBackColor = false;
             btnSalvar.Click += btnSalvar_Click;
             // 
-            // lblMensagem
-            // 
-            lblMensagem.AutoSize = true;
-            lblMensagem.BackColor = SystemColors.ActiveBorder;
-            lblMensagem.BorderStyle = BorderStyle.FixedSingle;
-            lblMensagem.Font = new Font("Yu Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblMensagem.ForeColor = SystemColors.WindowFrame;
-            lblMensagem.Location = new Point(572, 434);
-            lblMensagem.Name = "lblMensagem";
-            lblMensagem.Size = new Size(2, 23);
-            lblMensagem.TabIndex = 6;
-            // 
             // lstPessoas
             // 
             lstPessoas.FormattingEnabled = true;
             lstPessoas.ItemHeight = 15;
-            lstPessoas.Location = new Point(572, 205);
+            lstPessoas.Location = new Point(572, 210);
             lstPessoas.Name = "lstPessoas";
             lstPessoas.Size = new Size(441, 184);
             lstPessoas.TabIndex = 7;
@@ -152,7 +141,7 @@
             btnVer.FlatAppearance.BorderSize = 2;
             btnVer.Font = new Font("Yu Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnVer.ForeColor = SystemColors.WindowFrame;
-            btnVer.Location = new Point(292, 317);
+            btnVer.Location = new Point(291, 322);
             btnVer.Name = "btnVer";
             btnVer.Size = new Size(118, 33);
             btnVer.TabIndex = 8;
@@ -168,9 +157,9 @@
             btnExcluir.FlatAppearance.BorderSize = 2;
             btnExcluir.Font = new Font("Yu Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnExcluir.ForeColor = SystemColors.Window;
-            btnExcluir.Location = new Point(163, 356);
+            btnExcluir.Location = new Point(163, 418);
             btnExcluir.Name = "btnExcluir";
-            btnExcluir.Size = new Size(194, 33);
+            btnExcluir.Size = new Size(388, 33);
             btnExcluir.TabIndex = 9;
             btnExcluir.Text = "&Excluir";
             btnExcluir.UseVisualStyleBackColor = false;
@@ -184,24 +173,56 @@
             btnLimpar.FlatAppearance.BorderSize = 2;
             btnLimpar.Font = new Font("Yu Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnLimpar.ForeColor = SystemColors.Window;
-            btnLimpar.Location = new Point(363, 356);
+            btnLimpar.Location = new Point(803, 419);
             btnLimpar.Name = "btnLimpar";
-            btnLimpar.Size = new Size(188, 33);
+            btnLimpar.Size = new Size(210, 33);
             btnLimpar.TabIndex = 10;
             btnLimpar.Text = " &Limpar Lista";
             btnLimpar.UseVisualStyleBackColor = false;
             btnLimpar.Click += btnLimpar_Click;
+            // 
+            // btnGerar
+            // 
+            btnGerar.BackColor = SystemColors.ActiveBorder;
+            btnGerar.Cursor = Cursors.Hand;
+            btnGerar.FlatAppearance.BorderColor = Color.DimGray;
+            btnGerar.FlatAppearance.BorderSize = 2;
+            btnGerar.Font = new Font("Yu Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnGerar.ForeColor = SystemColors.WindowFrame;
+            btnGerar.Location = new Point(572, 419);
+            btnGerar.Name = "btnGerar";
+            btnGerar.Size = new Size(210, 33);
+            btnGerar.TabIndex = 11;
+            btnGerar.Text = "&Gerar Documento";
+            btnGerar.UseVisualStyleBackColor = false;
+            // 
+            // btnLimparCaixa
+            // 
+            btnLimparCaixa.BackColor = Color.Red;
+            btnLimparCaixa.Cursor = Cursors.Hand;
+            btnLimparCaixa.FlatAppearance.BorderColor = Color.DimGray;
+            btnLimparCaixa.FlatAppearance.BorderSize = 2;
+            btnLimparCaixa.Font = new Font("Yu Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnLimparCaixa.ForeColor = SystemColors.Window;
+            btnLimparCaixa.Location = new Point(163, 370);
+            btnLimparCaixa.Name = "btnLimparCaixa";
+            btnLimparCaixa.Size = new Size(388, 33);
+            btnLimparCaixa.TabIndex = 12;
+            btnLimparCaixa.Text = " Lim&par Caixa";
+            btnLimparCaixa.UseVisualStyleBackColor = false;
+            btnLimparCaixa.Click += btnLimparCaixa_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1176, 662);
+            Controls.Add(btnLimparCaixa);
+            Controls.Add(btnGerar);
             Controls.Add(btnLimpar);
             Controls.Add(btnExcluir);
             Controls.Add(btnVer);
             Controls.Add(lstPessoas);
-            Controls.Add(lblMensagem);
             Controls.Add(btnSalvar);
             Controls.Add(btnCriar);
             Controls.Add(txtIdade);
@@ -223,10 +244,11 @@
         private TextBox txtIdade;
         private Button btnCriar;
         private Button btnSalvar;
-        private Label lblMensagem;
         private ListBox lstPessoas;
         private Button btnVer;
         private Button btnExcluir;
         private Button btnLimpar;
+        private Button btnGerar;
+        private Button btnLimparCaixa;
     }
 }
