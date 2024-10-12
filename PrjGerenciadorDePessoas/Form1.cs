@@ -90,13 +90,13 @@ namespace PrjGerenciadorDePessoas
             //}
             //else
             //{
-                DialogResult ExcluirPessoa = MessageBox.Show($"Tem certeza que deseja excluir {lstPessoas.SelectedItem}?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Hand);
-                if (ExcluirPessoa == DialogResult.Yes)
-                {
-                    lstPessoas.Items.Remove(lstPessoas.SelectedItem);
+            DialogResult ExcluirPessoa = MessageBox.Show($"Tem certeza que deseja excluir {lstPessoas.SelectedItem}?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Hand);
+            if (ExcluirPessoa == DialogResult.Yes)
+            {
+                lstPessoas.Items.Remove(lstPessoas.SelectedItem);
 
-                    Reset();
-                }
+                Reset();
+            }
             //}
         }
 
@@ -144,6 +144,27 @@ namespace PrjGerenciadorDePessoas
             btnSalvar.Enabled = false;
             btnExcluir.Enabled = false;
             btnVer.Enabled = false;
+        }
+
+        private void btnGerar_Click(object sender, EventArgs e)
+        {
+            string conteudoArquivo = $"Nome: {this.pessoa.Nome} - Idade:{this.pessoa.getIdadeFormatada()}";
+
+            try
+            {
+                File.WriteAllText("relatorio//relatorio.txt", conteudoArquivo);
+                MessageBox.Show("Relátório gerado com sucesso!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Reset();
+            }
+            //caso tenha mais codigo após os catches é importante o uso do -----return-----
+            catch (DirectoryNotFoundException ex)
+            {
+                MessageBox.Show("Houve um erro na criação do diretório. Pasta não encontrada!","Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

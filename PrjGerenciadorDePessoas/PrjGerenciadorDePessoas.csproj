@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="relatorio\**" />
+    <EmbeddedResource Remove="relatorio\**" />
+    <None Remove="relatorio\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="PrjHelloWorld" Version="1.0.2" />
   </ItemGroup>
 
