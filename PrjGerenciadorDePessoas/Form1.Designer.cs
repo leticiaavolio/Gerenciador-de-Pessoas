@@ -41,6 +41,8 @@
             txtNome = new TextBox();
             lblIdade = new Label();
             lblNome = new Label();
+            cbxTipoDoc = new ComboBox();
+            label1 = new Label();
             pnlForm.SuspendLayout();
             SuspendLayout();
             // 
@@ -62,9 +64,9 @@
             btnLimpar.FlatAppearance.BorderSize = 2;
             btnLimpar.Font = new Font("Yu Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnLimpar.ForeColor = SystemColors.Window;
-            btnLimpar.Location = new Point(836, 419);
+            btnLimpar.Location = new Point(879, 419);
             btnLimpar.Name = "btnLimpar";
-            btnLimpar.Size = new Size(210, 33);
+            btnLimpar.Size = new Size(167, 33);
             btnLimpar.TabIndex = 10;
             btnLimpar.Text = " &Limpar Lista";
             btnLimpar.UseVisualStyleBackColor = false;
@@ -78,9 +80,9 @@
             btnGerar.FlatAppearance.BorderSize = 2;
             btnGerar.Font = new Font("Yu Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnGerar.ForeColor = SystemColors.WindowFrame;
-            btnGerar.Location = new Point(605, 419);
+            btnGerar.Location = new Point(605, 461);
             btnGerar.Name = "btnGerar";
-            btnGerar.Size = new Size(210, 33);
+            btnGerar.Size = new Size(264, 33);
             btnGerar.TabIndex = 11;
             btnGerar.Text = "&Gerar Documento";
             btnGerar.UseVisualStyleBackColor = false;
@@ -233,11 +235,38 @@
             lblNome.TabIndex = 13;
             lblNome.Text = "Nome:";
             // 
+            // cbxTipoDoc
+            // 
+            cbxTipoDoc.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxTipoDoc.Font = new Font("Yu Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            cbxTipoDoc.FormattingEnabled = true;
+            cbxTipoDoc.Items.AddRange(new object[] { ".TXT", ".JSON" });
+            cbxTipoDoc.Location = new Point(605, 423);
+            cbxTipoDoc.Name = "cbxTipoDoc";
+            cbxTipoDoc.Size = new Size(264, 29);
+            cbxTipoDoc.TabIndex = 14;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = SystemColors.ActiveBorder;
+            label1.BorderStyle = BorderStyle.FixedSingle;
+            label1.Font = new Font("Yu Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = SystemColors.WindowFrame;
+            label1.Location = new Point(605, 391);
+            label1.Name = "label1";
+            label1.Size = new Size(154, 23);
+            label1.TabIndex = 22;
+            label1.Text = "Formato Relatório:";
+            label1.Click += label1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1176, 662);
+            Controls.Add(label1);
+            Controls.Add(cbxTipoDoc);
             Controls.Add(pnlForm);
             Controls.Add(btnGerar);
             Controls.Add(btnLimpar);
@@ -248,6 +277,7 @@
             pnlForm.ResumeLayout(false);
             pnlForm.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -264,5 +294,7 @@
         private TextBox txtNome;
         private Label lblIdade;
         private Label lblNome;
+        private ComboBox cbxTipoDoc;
+        private Label label1;
     }
 }

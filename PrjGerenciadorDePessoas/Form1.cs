@@ -1,4 +1,6 @@
 using PrjHelloWorld.Models;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace PrjGerenciadorDePessoas
 {
@@ -16,6 +18,7 @@ namespace PrjGerenciadorDePessoas
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            cbxTipoDoc.Text = ".TXT";
         }
 
         private void btnCriar_Click(object sender, EventArgs e)
@@ -148,23 +151,79 @@ namespace PrjGerenciadorDePessoas
 
         private void btnGerar_Click(object sender, EventArgs e)
         {
-            string conteudoArquivo = $"Nome: {this.pessoa.Nome} - Idade:{this.pessoa.getIdadeFormatada()}";
+            //string conteudoArquivo = $"Nome: {this.pessoa.Nome} - Idade:{this.pessoa.getIdadeFormatada()}";
 
             try
             {
-                File.WriteAllText("relatorio//relatorio.txt", conteudoArquivo);
-                MessageBox.Show("Relátório gerado com sucesso!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Reset();
-            }
-            //caso tenha mais codigo após os catches é importante o uso do -----return-----
-            catch (DirectoryNotFoundException ex)
-            {
-                MessageBox.Show("Houve um erro na criação do diretório. Pasta não encontrada!","Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (cbxTipoDoc.Text == ".TXT")
+                {
+                    gerarRelatorio(SerializarParaTxt());
+                }
+                else
+                {
+                    gerarRelatorio(SerializarParaJson());
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+        }
+        private void gerarRelatorio(string conteudo)
+        {
+            try
+            {
+                File.WriteAllText("relatorio/relatorio.txt", conteudo);
+
+                MessageBox.Show($"Relatório gerado com sucesso no formato {cbxTipoDoc.Text}", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Reset();
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                MessageBox.Show("Houve um erro na criação do diretório. Pasta não encontrada!", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+        }
+
+        private string SerializarParaTxt()
+        {
+            Pessoa p;
+
+            string linha = "";
+
+            for (int i = 0; i < lstPessoas.Items.Count; i++)
+            {
+                p = (Pessoa)lstPessoas.Items[i];
+                linha = $"{linha}" + $"{p.Nome} - {p.getIdadeFormatada()}\n";
+            }
+
+            return linha;
+        }
+
+        private string SerializarParaJson()
+        {
+            string linha = "";
+            Pessoa pessoa;
+            List<Pessoa> listaPessoas = new List<Pessoa>();
+
+            for (int i = 0; i < lstPessoas.Items.Count; i++)
+            {
+                pessoa = (Pessoa)lstPessoas.Items[i];
+                listaPessoas.Add(pessoa);
+            }
+            string json = JsonSerializer.Serialize(listaPessoas, new JsonSerializerOptions { WriteIndented = true });
+            return json;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
