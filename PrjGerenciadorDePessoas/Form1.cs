@@ -176,21 +176,26 @@ namespace PrjGerenciadorDePessoas
         {
             try
             {
-                File.WriteAllText("relatorio/relatorio.txt", conteudo);
+                 string CaminhoDiretorio = "relatorio";
+                 if (!Directory.Exists(CaminhoDiretorio))
+                 {
+                    Directory.CreateDirectory(CaminhoDiretorio); // Criando a pasta se ela não existir
+                 }
 
-                MessageBox.Show($"Relatório gerado com sucesso no formato {cbxTipoDoc.Text}", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Reset();
+                 File.WriteAllText($"{CaminhoDiretorio}/relatorio.txt", conteudo);
+
+                 MessageBox.Show($"Relatório gerado com sucesso no formato {cbxTipoDoc.Text}", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Reset();
             }
             catch (DirectoryNotFoundException ex)
             {
-                MessageBox.Show("Houve um erro na criação do diretório. Pasta não encontrada!", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
+            
         }
 
         private string SerializarParaTxt()
