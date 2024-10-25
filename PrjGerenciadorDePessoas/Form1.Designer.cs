@@ -258,7 +258,6 @@
             label1.Size = new Size(154, 23);
             label1.TabIndex = 22;
             label1.Text = "Formato Relatório:";
-            label1.Click += label1_Click;
             // 
             // Form1
             // 

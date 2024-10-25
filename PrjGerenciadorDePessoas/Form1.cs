@@ -1,6 +1,8 @@
 using PrjHelloWorld.Models;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Newtonsoft.Json.Bson;
+using Newtonsoft.Json;
 
 namespace PrjGerenciadorDePessoas
 {
@@ -208,22 +210,34 @@ namespace PrjGerenciadorDePessoas
 
         private string SerializarParaJson()
         {
-            string linha = "";
-            Pessoa pessoa;
-            List<Pessoa> listaPessoas = new List<Pessoa>();
+            //string linha = "";
+            //Pessoa pessoa;
+            //List<Pessoa> listaPessoas = new List<Pessoa>();
+
+            //for (int i = 0; i < lstPessoas.Items.Count; i++)
+            //{
+            //    pessoa = (Pessoa)lstPessoas.Items[i];
+            //    listaPessoas.Add(pessoa);
+            //}
+            //string json = JsonSerializer.Serialize(listaPessoas, new JsonSerializerOptions { WriteIndented = true });
+            //return json;
+
+            var listaSimplificada = new List<object>();
 
             for (int i = 0; i < lstPessoas.Items.Count; i++)
             {
-                pessoa = (Pessoa)lstPessoas.Items[i];
-                listaPessoas.Add(pessoa);
+                Pessoa pessoa = (Pessoa)lstPessoas.Items[i];
+
+                listaSimplificada.Add(new
+                {
+                    Nome = pessoa.Nome,
+                    Idade = pessoa.Idade
+                });
             }
-            string json = JsonSerializer.Serialize(listaPessoas, new JsonSerializerOptions { WriteIndented = true });
+            
+            string json = JsonConvert.SerializeObject(listaSimplificada, Formatting.Indented);
             return json;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
