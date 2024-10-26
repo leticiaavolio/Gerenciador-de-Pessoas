@@ -59,7 +59,7 @@ namespace PrjGerenciadorDePessoas
 
             if (lstPessoas.SelectedItem != null)
             {
-                Pessoa p = (Pessoa)lstPessoas.SelectedItem;//casting
+                Pessoa p = (Pessoa)lstPessoas.SelectedItem;//Casting
                 txtNome.Text = p.Nome;
                 txtIdade.Text = p.Idade.ToString();
             }
@@ -176,26 +176,34 @@ namespace PrjGerenciadorDePessoas
         {
             try
             {
-                 string CaminhoDiretorio = "relatorio";
-                 if (!Directory.Exists(CaminhoDiretorio))
-                 {
-                    Directory.CreateDirectory(CaminhoDiretorio); // Criando a pasta se ela não existir
-                 }
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.Filter = "Arquivos de Texto|*.txt|Arquivos JSON|*.json"; // Opções de extensão de arquivo
+                    saveFileDialog.Title = "Salvar Relatório";
+                    saveFileDialog.FileName = "relatorio";
 
-                 File.WriteAllText($"{CaminhoDiretorio}/relatorio.txt", conteudo);
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = saveFileDialog.FileName;
 
-                 MessageBox.Show($"Relatório gerado com sucesso no formato {cbxTipoDoc.Text}", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Reset();
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                MessageBox.Show(ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        string CaminhoDiretorio = Path.GetDirectoryName(filePath);
+                        if (!Directory.Exists(CaminhoDiretorio))
+                        {
+                            Directory.CreateDirectory(CaminhoDiretorio);
+                        }
+
+                        File.WriteAllText(filePath, conteudo);
+
+                        MessageBox.Show($"Relatório gerado com sucesso: {filePath}", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        Reset();
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
         }
 
         private string SerializarParaTxt()
